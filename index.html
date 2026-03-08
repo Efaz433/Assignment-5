@@ -39,6 +39,58 @@
     </style>
   </head>
   <body>
+    <section>
+      <!-- log in form -->
+      <div
+        class="card bg-base-100 mt-2 w-full max-w-sm mx-auto shrink-0 shadow-2xl"
+      >
+        <div class="card-body space-y-4">
+          <!--website descriptions -->
+          <div class="space-y-4">
+            <figure>
+              <img src="./assets/github-logo.png" alt="" />
+            </figure>
+            <h1 class="text-4xl font-bold text-center">
+              GitHub Issues Tracker
+            </h1>
+            <p class="text-center">Sign in to manage your issues</p>
+          </div>
+          <!-- login form -->
+          <fieldset class="fieldset">
+            <label class="label">Username</label>
+            <input
+              id="username"
+              type="text"
+              class="input"
+              placeholder="Enter Username"
+            />
+            <label class="label">Password</label>
+            <input
+              id="password"
+              type="password"
+              class="input"
+              placeholder="Password"
+            />
+            <div><a class="link link-hover">Forgot password?</a></div>
+            <button id="sign-in-btn" class="btn btn-primary">Sign In</button>
+          </fieldset>
+          <!-- divider -->
+          <div class="flex items-center">
+            <hr class="flex-1" />
+            <span>OR</span>
+            <hr class="flex-1" />
+          </div>
+          <!-- username and password -->
+          <div class="text-center space-y-4">
+            <p class="text-[#b1b2b5]">Demo Credentials</p>
+            <div>
+              <p><span class="font-bold">Username:</span> admin</p>
+              <p><span class="font-bold">Password:</span> admin123</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     <script src="./functionality.js"></script>
   </body>
 </html>
