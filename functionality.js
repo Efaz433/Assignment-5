@@ -11,6 +11,7 @@
 let cardContainer = document.getElementById("card-container");
 let totalAmount = document.getElementById("total-amount");
 const cmnBtns = document.querySelectorAll(".cmn-btn");
+const modalContainer = document.getElementById("my_modal_1");
 
 cmnBtns.forEach((cmnBtn) => {
   cmnBtn.addEventListener("click", async (event) => {
@@ -19,6 +20,7 @@ cmnBtns.forEach((cmnBtn) => {
     );
     const data = await res.json();
     const cards = await data.data;
+
     if (event.target.innerText === "All") {
       cardShower(cards);
       buttonClicker(event.target);
@@ -37,23 +39,8 @@ cmnBtns.forEach((cmnBtn) => {
 function cardShower(cards) {
   cardContainer.innerHTML = "";
   cards.forEach((card) => {
-    //         {
-    //     "id": 1,
-    //     "title": "Fix navigation menu on mobile devices",
-    //     "description": "The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive behavior.",
-    //     "status": "open",
-    //     "labels": [
-    //         "bug",
-    //         "help wanted"
-    //     ],
-    //     "priority": "high",
-    //     "author": "john_doe",
-    //     "assignee": "jane_smith",
-    //     "createdAt": "2024-01-15T10:30:00Z",
-    //     "updatedAt": "2024-01-15T10:30:00Z"
-    // }
     cardContainer.innerHTML += `
-             <div class="space-y-3 p-5 bg-white rounded-md shadow-xl ${card.status === "closed" ? "border-t-5 border-t-purple-800" : "border-t-5 border-t-green-800"}">
+             <div onclick="openModal('${card.id}')" class="space-y-3 p-5 bg-white rounded-md shadow-xl ${card.status === "closed" ? "border-t-5 border-t-purple-800" : "border-t-5 border-t-green-800"}">
             <div class="flex justify-between">
               <figure>
                 <img src="./assets/Open-Status.png" alt="" class="${card.status === "closed" ? "hidden" : ""}" />
@@ -104,3 +91,54 @@ searchBar.addEventListener("keyup", async () => {
   const cards = await res.json();
   cardShower(cards.data);
 });
+
+const openModal = async (id) => {
+  modalContainer.innerHTML = "";
+  const res = await fetch(
+    `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`,
+  );
+  const card = await res.json();
+  const data = card.data;
+  console.log(data);
+  modalContainer.innerHTML = `
+    <div class="modal-box space-y-3">
+      <h4 class="text-xl font-bold">${data.title}</h4>
+
+      <p>
+        <span class="${data.status}">${data.status}</span>
+        <i class="fa-solid fa-circle text-[10px]"></i>
+        <span class="text-slate-400">Opened by ${data.author}</span>
+        <i class="fa-solid fa-circle text-[10px]"></i>
+        <span class="text-slate-400">${data.createdAt}</span>
+      </p>
+
+      <div class="flex gap-1 flex-wrap items-center">
+        ${labelShower(data.labels)}
+      </div>
+
+      <p class="text-slate-400">
+        ${data.description}
+      </p>
+
+      <div class="flex justify-between">
+        <div class="flex-1">
+          <p class="text-slate-400">Assignee:</p>
+          <p class="font-bold">${data.assignee ? data.assignee : "no name"}</p>
+        </div>
+
+        <div class="flex-1">
+          <p class="text-slate-400">priority:</p>
+          <p class="${data.priority} w-fit">${data.priority}</p>
+        </div>
+      </div>
+
+      <div class="modal-action">
+        <form method="dialog">
+          <button class="btn">Close</button>
+        </form>
+      </div>
+    </div>
+  `;
+
+  modalContainer.showModal();
+};

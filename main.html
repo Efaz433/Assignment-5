@@ -57,6 +57,18 @@
         color: rgb(100, 100, 100);
         background-color: rgb(200, 200, 200);
       }
+      .open {
+        border-radius: 10px;
+        padding: 3px 10px 3px 10px;
+        color: white;
+        background-color: rgb(60, 179, 113);
+      }
+      .closed {
+        border-radius: 10px;
+        padding: 3px 10px 3px 10px;
+        color: white;
+        background-color: rgb(166, 0, 255);
+      }
     </style>
   </head>
   <body>
@@ -149,6 +161,9 @@
           class="mt-5 bg-base-200 p-4 grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
         ></div>
       </section>
+      <!-- Open the modal using ID.showModal() method -->
+
+      <dialog id="my_modal_1" class="modal"></dialog>
     </main>
     <script src="./functionality.js"></script>
   </body>
