@@ -9,6 +9,17 @@
 //   }
 // });
 
+function labelShower(labelArray) {
+  labelContainer = document.getElementById("label-container");
+  labelContainer = labelArray
+    .map((word) => {
+      return `<span class="medium">${word}</span>`;
+    })
+    .join(" ");
+  console.log(labelArray);
+  return labelContainer;
+}
+
 const cmnBtns = document.querySelectorAll(".cmn-btn");
 cmnBtns.forEach((cmnBtn) => {
   cmnBtn.addEventListener("click", async (event) => {
@@ -47,8 +58,8 @@ cmnBtns.forEach((cmnBtn) => {
             </div>
             <h4 class="text-xl font-bold">${card.title}</h4>
             <p class="text-slate-400">${card.description}</p>
-            <div class="flex gap-4">
-            ${}
+            <div id="label-container" class=" flex gap-1 flex-wrap items-center">
+            ${labelShower(card.labels)}
             </div>
             <hr class="text-slate-400" />
             <p class="text-slate-400">${card.author}</p>
