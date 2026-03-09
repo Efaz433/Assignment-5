@@ -36,10 +36,121 @@
       * {
         font-family: "Geist", sans-serif;
       }
+      .medium {
+        border: 1px solid orange;
+        border-radius: 10px;
+        padding: 6px 20px 6px 20px;
+        color: orangered;
+        background-color: rgba(255, 174, 0, 0.927);
+      }
+      .high {
+        border: 1px solid rgb(245, 151, 151);
+        border-radius: 10px;
+        padding: 6px 20px 6px 20px;
+        color: red;
+        background-color: rgb(248, 212, 212);
+      }
+      .low {
+        border: 1px solid rgb(240, 240, 240);
+        border-radius: 10px;
+        padding: 6px 20px 6px 20px;
+        color: rgb(100, 100, 100);
+        background-color: rgb(200, 200, 200);
+      }
     </style>
   </head>
   <body>
-    <h1></h1>
+    <header>
+      <!-- navbar -->
+      <div class="navbar bg-base-100 shadow-sm">
+        <div class="flex-1">
+          <a class="btn btn-ghost text-xl"
+            ><img src="./assets/github-logo.png" alt="" class="w-[50px]" />
+            GitHub Issues Tracker</a
+          >
+        </div>
+        <div class="flex gap-2">
+          <label class="input">
+            <svg
+              class="h-[1em] opacity-50"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <g
+                stroke-linejoin="round"
+                stroke-linecap="round"
+                stroke-width="2.5"
+                fill="none"
+                stroke="currentColor"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.3-4.3"></path>
+              </g>
+            </svg>
+            <input type="search" placeholder="Search" class="w-15 sm:w-40" />
+          </label>
+          <button class="btn btn-primary">
+            <i class="fa-solid fa-plus"></i> New Issue
+          </button>
+        </div>
+      </div>
+    </header>
+    <main class="max-w-11/12 mx-auto mt-10">
+      <!-- section btn -->
+      <section class="bg-base-200 px-4 py-4 shadow-md">
+        <button
+          id="all-btn"
+          class="btn cmn-btn btn-soft btn-primary text-slate-400"
+        >
+          All
+        </button>
+        <button
+          id="open-btn"
+          class="btn cmn-btn btn-soft btn-primary text-slate-400"
+        >
+          Open
+        </button>
+        <button
+          id="closed-btn"
+          class="btn cmn-btn btn-soft btn-primary text-slate-400"
+        >
+          Closed
+        </button>
+      </section>
+      <section class="mt-4">
+        <!-- card amount part -->
+        <div class="flex justify-between border-b border-slate-300 py-3">
+          <div class="flex items-center gap-3">
+            <!-- circle image -->
+            <figure>
+              <img src="./assets/Aperture.png" alt="" />
+            </figure>
+            <!-- amount  -->
+            <div class="space-y-1">
+              <h3 class="text-3xl font-bold">
+                <span id="total-amount">0</span> Issues
+              </h3>
+              <p class="text-slate-400">Track and manage your project issues</p>
+            </div>
+          </div>
+          <!-- card color -->
+          <div class="flex items-center gap-3">
+            <p>
+              <span><i class="fa-solid fa-circle text-green-800"></i></span>Open
+            </p>
+            <p>
+              <span><i class="fa-solid fa-circle text-purple-800"></i></span
+              >CLosed
+            </p>
+          </div>
+        </div>
+        <!-- card container -->
+        <div
+          id="card-container"
+          class="mt-5 bg-base-200 p-4 grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        ></div>
+      </section>
+    </main>
     <script src="./functionality.js"></script>
   </body>
 </html>
