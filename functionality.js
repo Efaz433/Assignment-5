@@ -21,12 +21,15 @@ cmnBtns.forEach((cmnBtn) => {
     cardContainer.innerHTML = "";
     if (event.target.innerText === "All") {
       cardShower(cards);
+      buttonClicker(event.target);
     } else if (event.target.innerText === "Open") {
       const openCards = cards.filter((card) => card.status === "open");
       cardShower(openCards);
+      buttonClicker(event.target);
     } else if (event.target.innerText === "Closed") {
       const closeCards = cards.filter((card) => card.status === "closed");
       cardShower(closeCards);
+      buttonClicker(event.target);
     }
   });
 });
@@ -80,3 +83,13 @@ function labelShower(labelArray) {
     .join(" ");
   return labelContainer;
 }
+
+function buttonClicker(target) {
+  cmnBtns.forEach((btn) => btn.classList.remove("bg-blue-800"));
+  target.classList.add("bg-blue-800");
+}
+
+// to defaulty seclect allJobs btn
+window.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("all-btn").click();
+});
