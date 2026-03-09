@@ -11,6 +11,7 @@
 let cardContainer = document.getElementById("card-container");
 let totalAmount = document.getElementById("total-amount");
 const cmnBtns = document.querySelectorAll(".cmn-btn");
+
 cmnBtns.forEach((cmnBtn) => {
   cmnBtn.addEventListener("click", async (event) => {
     const res = await fetch(
@@ -18,7 +19,6 @@ cmnBtns.forEach((cmnBtn) => {
     );
     const data = await res.json();
     const cards = await data.data;
-    cardContainer.innerHTML = "";
     if (event.target.innerText === "All") {
       cardShower(cards);
       buttonClicker(event.target);
@@ -35,6 +35,7 @@ cmnBtns.forEach((cmnBtn) => {
 });
 
 function cardShower(cards) {
+  cardContainer.innerHTML = "";
   cards.forEach((card) => {
     //         {
     //     "id": 1,
@@ -70,8 +71,8 @@ function cardShower(cards) {
             <p class="text-slate-400">${card.createdAt}</p>
           </div>
             `;
-    totalAmount.innerText = cardContainer.children.length;
   });
+  totalAmount.innerText = cardContainer.children.length;
 }
 
 function labelShower(labelArray) {
@@ -92,4 +93,14 @@ function buttonClicker(target) {
 // to defaulty seclect allJobs btn
 window.addEventListener("DOMContentLoaded", () => {
   document.getElementById("all-btn").click();
+});
+
+const searchBar = document.getElementById("search-bar");
+searchBar.addEventListener("keyup", async () => {
+  const text = searchBar.value;
+  const res = await fetch(
+    `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${text}`,
+  );
+  const cards = await res.json();
+  cardShower(cards.data);
 });
