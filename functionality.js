@@ -9,7 +9,7 @@
 //   }
 // });
 let cardContainer = document.getElementById("card-container");
-
+let totalAmount = document.getElementById("total-amount");
 const cmnBtns = document.querySelectorAll(".cmn-btn");
 cmnBtns.forEach((cmnBtn) => {
   cmnBtn.addEventListener("click", async (event) => {
@@ -24,6 +24,9 @@ cmnBtns.forEach((cmnBtn) => {
     } else if (event.target.innerText === "Open") {
       const openCards = cards.filter((card) => card.status === "open");
       cardShower(openCards);
+    } else if (event.target.innerText === "Closed") {
+      const closeCards = cards.filter((card) => card.status === "closed");
+      cardShower(closeCards);
     }
   });
 });
@@ -64,6 +67,7 @@ function cardShower(cards) {
             <p class="text-slate-400">${card.createdAt}</p>
           </div>
             `;
+    totalAmount.innerText = cardContainer.children.length;
   });
 }
 
