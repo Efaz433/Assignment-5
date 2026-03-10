@@ -12,9 +12,20 @@ let cardContainer = document.getElementById("card-container");
 let totalAmount = document.getElementById("total-amount");
 const cmnBtns = document.querySelectorAll(".cmn-btn");
 const modalContainer = document.getElementById("my_modal_1");
+const spinner = document.getElementById("spinner");
+const spinnerFunction = (state) => {
+  if (state) {
+    spinner.classList.remove("hidden");
+    cardContainer.classList.add("hidden");
+  } else {
+    spinner.classList.add("hidden");
+    cardContainer.classList.remove("hidden");
+  }
+};
 
 cmnBtns.forEach((cmnBtn) => {
   cmnBtn.addEventListener("click", async (event) => {
+    spinnerFunction(true);
     const res = await fetch(
       "https://phi-lab-server.vercel.app/api/v1/lab/issues",
     );
@@ -33,6 +44,7 @@ cmnBtns.forEach((cmnBtn) => {
       cardShower(closeCards);
       buttonClicker(event.target);
     }
+    spinnerFunction(false);
   });
 });
 
@@ -84,16 +96,17 @@ window.addEventListener("DOMContentLoaded", () => {
 
 const searchBar = document.getElementById("search-bar");
 searchBar.addEventListener("keyup", async () => {
+  spinnerFunction(true);
   const text = searchBar.value;
   const res = await fetch(
     `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${text}`,
   );
   const cards = await res.json();
   cardShower(cards.data);
+  spinnerFunction(false);
 });
 
 const openModal = async (id) => {
-  modalContainer.innerHTML = "";
   const res = await fetch(
     `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`,
   );
